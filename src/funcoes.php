@@ -15,7 +15,8 @@ class Funcoes
 
      * */
     public function SeculoAno(int $ano): int {
-        
+        $seculo = ($ano/100)+1;
+        return $seculo;
     }
 
     
@@ -37,7 +38,22 @@ class Funcoes
 
      * */
     public function PrimoAnterior(int $numero): int {
-        
+       $primo = 1;
+        for($n = $numero-1; $n > 0; $n--){
+            $multiplos = 0;
+            if($n>2){
+                for($cont = 2; $cont < $n; $cont++){
+                    if($n % $cont == 0){
+                        $multiplos++;
+                    }
+                }
+                if($multiplos == 0){
+                    $primo = $n;
+                    break;
+                }
+            }
+        }
+        return $primo;   
     }
 
 
@@ -66,7 +82,20 @@ class Funcoes
 
      * */
     public function SegundoMaior(array $arr): int {
-        
+        $maior = 0;
+        $segundo = 0;
+        foreach($arr as $key){
+            foreach($key as $subkey){
+                if($subkey > $maior){
+                    $segundo = $maior;
+                    $maior = $subkey;
+                }
+                    
+                if($subkey < $maior && $subkey > $segundo)
+                    $segundo = $subkey;
+            }
+        }
+        return $segundo;
     }
 	
 	
@@ -107,6 +136,20 @@ class Funcoes
      * */
     
 	public function SequenciaCrescente(array $arr): boolean {
-        
+        $resposta = TRUE;
+        $len = count($arr);
+        if($len > 2){
+            $diferente = 0;
+             for($i = 1; $i < $len; $i++){
+                $anterior = $arr[$i-1];
+                $atual = $arr[$i];
+                if($atual < $anterior)
+                    $diferente++;
+            }
+            if($diferente > 1)
+                $resposta = FALSE;
+        } 
+
+        return $resposta;
     }
 }
